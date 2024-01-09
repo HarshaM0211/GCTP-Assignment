@@ -7,6 +7,8 @@ import io.github.millij.poi.ss.model.annotations.SheetColumn;
 @Sheet(value = "Congestion History Data")
 public class CongestionHistory {
 
+    // Fields
+    // ------------------------------------------------------------------------
 
     @SheetColumn(value = "District")
     private String district;
@@ -38,28 +40,15 @@ public class CongestionHistory {
     @SheetColumn(value = "Time")
     private String time;
 
+    // Constructors
+    // ------------------------------------------------------------------------
 
     public CongestionHistory() {
         super();
     }
 
-
-
-    public CongestionHistory(String district, String subDivision, String station, String junctionNo,
-            String junctionName, String feedJunctionNo, String feedJunctionName, String delay, String date,
-            String time) {
-        super();
-        this.district = district;
-        this.subDivision = subDivision;
-        this.station = station;
-        this.junctionNo = junctionNo;
-        this.junctionName = junctionName;
-        this.feedJunctionNo = feedJunctionNo;
-        this.feedJunctionName = feedJunctionName;
-        this.delay = delay;
-        this.date = date;
-        this.time = time;
-    }
+    // Getters and Setters
+    // ------------------------------------------------------------------------
 
     public String getDistrict() {
         return district;

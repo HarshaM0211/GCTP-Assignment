@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -21,6 +22,9 @@ import io.github.millij.poi.ss.writer.SpreadsheetWriter;
 
 
 public class CongestionsWriter {
+
+    // Fields
+    // ------------------------------------------------------------------------
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CongestionsWriter.class);
 
@@ -53,13 +57,13 @@ public class CongestionsWriter {
 
         // Both files row data into Nested loops
         for (Junctions jncn : junctions) {
-            if (StringUtils.isEmpty(jncn.getSignalNo())) {
+            if (Objects.isNull(jncn) || StringUtils.isBlank(jncn.getSignalNo())) {
                 continue;
             }
 
             double count = 0;
-            for (CongestionHistory congHistory : congHistoryList) {
-                if (jncn.getSignalNo().equals(congHistory.getJunctionNo())) { // Incrementing count on equality
+            for (CongestionHistory congHistory : congHistoryList) { // Incrementing count on equality
+                if (Objects.nonNull(congHistory) && jncn.getSignalNo().equals(congHistory.getJunctionNo())) {
                     count++;
                     signalNoCountMap.put(jncn.getSignalNo(), count);
                 }
@@ -68,7 +72,7 @@ public class CongestionsWriter {
                     signalNoCountMap.get(jncn.getSignalNo()));
 
 
-            fromJuncnsCountRecords.add(new JunctionsCount(jncn.getSignalNo(), jncn.getName(), Double.valueOf(count)));
+            fromJuncnsCountRecords.add(new JunctionsCount(jncn.getSignalNo(), jncn.getName(), count));
         }
 
         ssw.addSheet(JunctionsCount.class, fromJuncnsCountRecords, true);
@@ -96,13 +100,13 @@ public class CongestionsWriter {
 
         // Both files row data into Nested loops
         for (Junctions jncn : junctions) {
-            if (StringUtils.isEmpty(jncn.getSignalNo())) {
+            if (Objects.isNull(jncn) || StringUtils.isBlank(jncn.getSignalNo())) {
                 continue;
             }
 
             double count = 0;
-            for (CongestionHistory congHistory : congHistoryList) {
-                if (jncn.getSignalNo().equals(congHistory.getFeedJunctionNo())) { // Incrementing count on equality
+            for (CongestionHistory congHistory : congHistoryList) { // Incrementing count on equality
+                if (Objects.nonNull(congHistory) && jncn.getSignalNo().equals(congHistory.getFeedJunctionNo())) {
                     count++;
                     signalNoCountMap.put(jncn.getSignalNo(), count);
                 }

@@ -7,6 +7,9 @@ import io.github.millij.poi.ss.model.annotations.SheetColumn;
 @Sheet(value = "Sheet1")
 public class Junctions {
 
+    // Fields
+    // ------------------------------------------------------------------------
+
     @SheetColumn("S No")
     private Integer sNo;
 
@@ -32,23 +35,14 @@ public class Junctions {
     private String geoLocations;
 
     // Constructors
+    // ------------------------------------------------------------------------
 
     public Junctions() {
         super();
     }
 
-    public Junctions(Integer sNo, String district, String subDivision, String station, String name, String signalNo,
-            String feedSignals, String geoLocations) {
-        super();
-        this.sNo = sNo;
-        this.district = district;
-        this.subDivision = subDivision;
-        this.station = station;
-        this.name = name;
-        this.signalNo = signalNo;
-        this.feedSignals = feedSignals;
-        this.geoLocations = geoLocations;
-    }
+    // Getters and Setters
+    // ------------------------------------------------------------------------
 
     public Integer getsNo() {
         return sNo;
