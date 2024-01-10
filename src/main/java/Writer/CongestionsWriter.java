@@ -81,22 +81,22 @@ public class CongestionsWriter {
             if (Objects.isNull(jncn) || StringUtils.isBlank(jncn.getSignalNo())) {
                 continue;
             }
-            
+
             final String signalNo = jncn.getSignalNo();
 
             double jncnCount = 0;
 
             for (CongestionHistory congHistory : congHistoryList) { // Incrementing count on equality
 
-                if (isSourceSignal && Objects.nonNull(congHistory)
-                        && signalNo.equals(congHistory.getJunctionNo())) {
+                // "targetJncn" generalises both SourceJncn & FeedJncn
+                final String targetJncn = isSourceSignal //
+                        ? congHistory.getJunctionNo() //
+                        : congHistory.getFeedJunctionNo();
+
+                if (Objects.nonNull(congHistory) && signalNo.equals(targetJncn)) {
                     jncnCount++;
                 }
 
-                if ((!isSourceSignal) && Objects.nonNull(congHistory)
-                        && signalNo.equals(congHistory.getFeedJunctionNo())) {
-                    jncnCount++;
-                }
             }
             // Setting count values of SignalNo. into Map & List
             signalNoCountMap.put(signalNo, jncnCount);
